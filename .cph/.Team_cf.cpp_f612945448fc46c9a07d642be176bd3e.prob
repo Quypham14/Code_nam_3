@@ -1,0 +1,1 @@
+{"name":"Local: Team_cf","url":"s:\\Code_nam_3\\Team_cf.cpp","tests":[{"id":1688356494524,"input":"3\n1 1 0\n1 1 1\n1 0 0","output":""},{"id":1688356615893,"input":"2\n0 0 1\n0 1 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"s:\\Code_nam_3\\Team_cf.cpp","group":"local","local":true}
