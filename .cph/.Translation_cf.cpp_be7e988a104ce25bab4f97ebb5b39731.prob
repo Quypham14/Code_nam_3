@@ -1,1 +1,0 @@
-{"name":"Local: Translation_cf","url":"s:\\Code_nam_3\\Translation_cf.cpp","tests":[{"id":1690546419337,"input":"code\nedoc\n","output":""},{"id":1690546431828,"input":"abb\naba","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"s:\\Code_nam_3\\Translation_cf.cpp","group":"local","local":true}
