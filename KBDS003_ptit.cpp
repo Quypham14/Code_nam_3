@@ -14,7 +14,7 @@ int main()
         long d[500][500];
         memset(d, 0, sizeof(d));
         d[0][0] = 1;
-        for (int i = 0; i <= n; ++i)
+        for (int i = 1; i <= n; ++i)
             for (int j = 1; j <= k; j++)
                 for (int x = 1; x <= i; x++)
                     d[i][j] = d[i][j] + d[i - x][j - 1];
