@@ -1,9 +1,11 @@
 #include <bits/stdc++.h>
+#define mod 1000000007
 using namespace std;
+
 int t;
-long n;
-int k;
-int count_fibo(int n, int k, int first, vector<long long> &fibo)
+int n, k;
+long f[26];
+int check(int n, int k, int start, int end)
 {
     if (k == 0)
     {
@@ -11,37 +13,86 @@ int count_fibo(int n, int k, int first, vector<long long> &fibo)
             return 1;
         return 0;
     }
-    int way = 0;
-    for (int i = first; i < fibo.size(); ++i)
-        if (fibo[i] <= n)
+    int ways = 0;
+    for (int i = start; i <= end; i++)
+    {
+        if (f[i] <= n)
         {
-            way += count_fibo(n - fibo[i], k - 1, i, fibo);
+            ways += check(n - f[i], k - 1, i, end)%mod;
         }
-    return way;
+    }
+    return ways;
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     cin >> t;
+    f[0] = 0;
+    f[1] = 1;
     while (t--)
     {
-        vector<long long> fibo;
         cin >> n >> k;
-        long f[45];
-        f[0] = 0;
-        f[1] = 1;
-        fibo.push_back(f[0]);
-        fibo.push_back(f[1]);
-        for (long i = 2; i <= 45; i++)
+        int end = 1;
+
+        for (int i = 2; i <= 26; i++)
         {
             f[i] = f[i - 1] + f[i - 2];
-            fibo.push_back(f[i]);
+            if (f[i] > n)
+            {
+                break;
+            }
+            end = i;
         }
-        // for (int i = 0; i < fibo.size(); ++i)
-        //     cout << fibo[i] << " ";
-        cout << count_fibo(n, k, 1, fibo) << "\n";
+        // for (int i = 0; i <= end; i++)
+        //     cout << f[i] << " ";
+        cout << check(n, k, 2, end) << "\n";
     }
     return 0;
 }
+// #include <bits/stdc++.h>
+// #define mod 1000000007
+// using namespace std;
+// int t;
+// long n;
+// int k;
+// long f[26];
+// long long treatment(long f[], long n, int end)
+// {
+//     long long d[26][26];
+//     memset(d, 0, sizeof(d));
+//     d[0][0] = 1;
+//     for (long i = n/2; i <= n; i++)
+//         for (int j = 1; j <= k; j++)
+//             for (int x = 3; f[x]<=i; x++)
+//                 d[i][j] = (d[i][j] + d[i - f[x]][j - 1]) % mod;
+//     return d[n][k] % mod;
+// }
+// int main()
+// {
+//     ios_base::sync_with_stdio(false);
+//     cin.tie(0);
+//     cout.tie(0);
+//     cin >> t;
+//     f[0] = 0;
+//     f[1] = 1;
+//     while (t--)
+//     {
+//         cin >> n >> k;
+//         int end = 1;
+
+//         for (int i = 2; i <= 26; i++)
+//         {
+//             f[i] = f[i - 1] + f[i - 2];
+//             if (f[i] > n)
+//             {
+//                 break;
+//             }
+//             end = i;
+//         }
+//         cout << treatment(f, n, end) << "\n";
+//     }
+//     return 0;
+// }

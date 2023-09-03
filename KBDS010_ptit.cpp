@@ -1,41 +1,26 @@
 #include <bits/stdc++.h>
 #define mod 1000000007
 using namespace std;
-
 int t;
-int n, k;
-
-int check(int n, int start, long f[])
-{
-    if (n == 0)
-        return 1;
-    int ways = 0;
-    for (int i = start; i < 2; i++)
-    {
-        if (f[i] <= n)
-        {
-            ways += check(n - f[i], i, f);
-        }
-    }
-    return ways;
-}
-
+long n;
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     cin >> t;
-
     while (t--)
     {
         cin >> n;
-        long f[26];
-        f[0] = 1;
-        f[1] = 2;
-        // for (int i = 0; i <= end; i++)
-        //     cout << f[i] << " ";
-        cout << check(n, 0, f) << "\n";
+        vector<int> d(3, 0);
+        d[0] = 1;
+        d[1] = 1;
+        for (long i = 2; i <= n; i++)
+            d[i % 3] = (d[(i - 1) % 3] + d[(i - 2) % 3]) % mod;
+        if (d[n%3] == 0)
+            cout << -1 << "\n";
+        else
+            cout << d[n % 3] % mod << "\n";
     }
     return 0;
 }

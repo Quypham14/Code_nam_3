@@ -41,7 +41,7 @@ int t;
 long n;
 void number(long n)
 {
-    long long d[10005];
+    long long d[1000005];
     memset(d, 0, sizeof(d));
     d[0] = 1;
     for (long i = 2; i <= n; i += 2)
