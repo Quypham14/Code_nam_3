@@ -1,34 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
-int t;
-int n, k, s;
-int a[1000];
+
+int dem = 0;
+vector<int> arr;
+
+void findSubset(int tong, int K, int S, int chiso)
+{
+    if (tong == S && K == 0)
+    {
+        dem++;
+        return;
+    }
+    if (chiso == arr.size() || K == 0)
+    {
+        return;
+    }
+    int remaining_elements = arr.size() - chiso;
+    if (tong + arr[chiso] <= S && remaining_elements >= K)
+    {
+        findSubset(tong + arr[chiso], K - 1, S, chiso + 1);
+    }
+    findSubset(tong, K, S, chiso + 1);
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+    int t;
     cin >> t;
     while (t--)
     {
-        cin >> n >> k >> s;
-        int q = s;
-        for (int i = 1; i <= n; ++i)
-            cin >> a[i];
-        int start = 1;
-        int dem = 0;
-        while (start <= n - k + 1)
+        int N, K, S;
+        cin >> N >> K >> S;
+        for (int i = 0; i < N; ++i)
         {
-            for (int i = start; i <= start + k-1; ++i)
-            {
-                s -= a[i];
-            }
-            if (s == 0)
-                dem++;
-            s = q;
-            start++;
+            int b;
+            cin >> b;
+            arr.push_back(b);
         }
+        findSubset(0, K, S, 0);
         cout << dem << "\n";
+        dem = 0;
+        arr.clear();
     }
     return 0;
 }
