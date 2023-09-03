@@ -1,2 +1,2 @@
 # Code_nam_3
-Solution codeforces
+Solution codeforces and PTIT
