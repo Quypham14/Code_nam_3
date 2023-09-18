@@ -1,52 +1,27 @@
 #include <iostream>
-#include <vector>
-#include <string>
-
 using namespace std;
-int t, n;
-string multiply(string num1, string num2)
-{
-    int len1 = num1.size();
-    int len2 = num2.size();
-    vector<int> result(len1 + len2, 0);
-
-    for (int i = len1 - 1; i >= 0; i--)
-    {
-        for (int j = len2 - 1; j >= 0; j--)
-        {
-            int product = (num1[i] - '0') * (num2[j] - '0');
-            int sum = product + result[i + j + 1];
-            result[i + j] += sum / 10;
-            result[i + j + 1] = sum % 10;
-        }
-    }
-
-    string resultStr;
-    for (int digit : result)
-    {
-        if (!(resultStr.empty() && digit == 0))
-        {
-            resultStr += to_string(digit);
-        }
-    }
-
-    return resultStr.empty() ? "0" : resultStr;
-}
-
+const int N = 1000001;
+int n, t, k;
+char res[2 * N];
 int main()
 {
     cin >> t;
     while (t--)
     {
         cin >> n;
-        string num1, num2;
-        for (int i = 0; i < n; ++i)
+        k = 0;
+        for (int i = 1; i < 2 * n; i++)
         {
-            num1 += '1';
-            num2 += '1';
+            if (i <= n)
+                k += i;
+            else
+                k += 2 * n - i;
+            res[2 * n - i] = k % 10 + 48;
+            k /= 10;
         }
-        string result = multiply(num1, num2);
-        cout << result << endl;
+        for (int i = 1; i < 2 * n; i++)
+            cout << res[i];
+        cout << endl;
     }
     return 0;
 }
