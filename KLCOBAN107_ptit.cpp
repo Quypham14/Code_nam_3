@@ -39,6 +39,9 @@ vector<vector<ll>> matrix_power(const vector<vector<ll>> &A, ll k, int N)
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     int T;
     cin >> T;
     while (T--)
