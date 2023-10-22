@@ -1,53 +1,55 @@
 #include <bits/stdc++.h>
 using namespace std;
-bool treatment(string a,string b)
+bool treatment(string a, string b)
 {
-    string a_clean="";
-    string b_clean="";
-    for(char c:a)
+    string a_clean = "";
+    string b_clean = "";
+    for (char c : a)
     {
 
-    if(c=='#')
-    {
-        if(!a_clean.empty())
+        if (c == '#')
         {
+            if (!a_clean.empty())
+            {
 
-        a_clean.pop_back();
+                a_clean.pop_back();
+            }
         }
-        else {
+        else
+        {
             a_clean.push_back(c);
         }
     }
-    }
-     for(char c:b)
+    for (char c : b)
     {
 
-    if(c=='#')
-    {
-        if(!b_clean.empty())
+        if (c == '#')
         {
+            if (!b_clean.empty())
+            {
 
-        b_clean.pop_back();
+                b_clean.pop_back();
+            }
         }
-        else {
+        else
+        {
             b_clean.push_back(c);
         }
     }
-    }
-    return a_clean==b_clean;
+    return a_clean == b_clean;
 }
 int t;
-string a,b;
+string a, b;
 int main()
 {
-    cin>>t;
+    cin >> t;
     cin.ignore();
- while(t--)
+    while (t--)
     {
 
-        cin>>a>>b;
-       bool result=treatment(a,b);
-    cout<<result<<"\n";
+        cin >> a >> b;
+        bool result = treatment(a, b);
+        cout << result << "\n";
     }
 
     return 0;
