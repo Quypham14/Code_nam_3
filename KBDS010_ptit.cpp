@@ -1,26 +1,46 @@
-#include <bits/stdc++.h>
-#define mod 1000000007
+#include<bits/stdc++.h>
 using namespace std;
-int t;
-long n;
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    cin >> t;
-    while (t--)
-    {
-        cin >> n;
-        vector<int> d(3, 0);
-        d[0] = 1;
-        d[1] = 1;
-        for (long i = 2; i <= n; i++)
-            d[i % 3] = (d[(i - 1) % 3] + d[(i - 2) % 3]) % mod;
-        if (d[n%3] == 0)
-            cout << -1 << "\n";
-        else
-            cout << d[n % 3] % mod << "\n";
-    }
-    return 0;
+#define ll long long
+const long long mod = 1e9 + 7;
+long long n;
+long long F[2][2], M[2][2];
+void Mul(long long f[2][2], long long m[2][2]) {
+  long long x = (f[0][0] * m[0][0] % mod + f[0][1] * m[1][0] % mod) % mod;
+  long long y = (f[0][0] * m[0][1] % mod + f[0][1] * m[1][1] % mod) % mod;
+  long long z = (f[1][0] * m[0][0] % mod + f[1][1] * m[1][0] % mod) % mod;
+  long long t = (f[1][0] * m[0][1] % mod + f[1][1] * m[1][1] % mod) % mod;
+  F[0][0] = x;
+  F[0][1] = y;
+  F[1][0] = z;
+  F[1][1] = t;
+}
+void Pow(long long f[2][2], long long n) {
+  if (n <= 1) return;
+  Pow(f, n / 2);
+  Mul(f, f);
+  if (n & 1) Mul(f, M);
+}
+void Solve() {
+  F[0][0] = F[0][1] = F[1][0] = 1;
+  F[1][1] = 0;
+  M[0][0] = M[0][1] = M[1][0] = 1;
+  M[1][1] = 0;
+  cin >> n;
+  if (n == 0)
+    cout << 0;
+  else {
+    Pow(F, n);
+    cout << F[0][0];
+  }
+  cout <<"\n";
+}
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    Solve();
+
+  }
+
+  return 0;
 }
