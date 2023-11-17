@@ -1,44 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define MOD 10000
-void hienthi(int S[], int sopt)
+#define ll long long
+string multiply(string a, string b)
 {
-    for (int i = sopt - 1; i >= 0; i--)
+    int n1 = a.size();
+    int n2 = b.size();
+    string ans(n1 + n2, '0');
+    for (int i = n1 - 1; i >= 0; i--)
     {
-        if (i < sopt - 1 && MOD > 10 && S[i] < 1000)
-            cout << "0";
-        if (i < sopt - 1 && MOD > 10 && S[i] < 100)
-            cout << "0";
-        if (i < sopt - 1 && MOD > 10 && S[i] < 10)
-            cout << "0";
-        cout << S[i];
+        int nho = 0;
+        for (int j = n2 - 1; j >= 0; j--)
+        {
+            int so = (a[i] - '0') * (b[j] - '0') + (ans[i + j + 1] - '0') + nho;
+            nho = so / 10;
+            ans[i + j + 1] = (char)(so % 10 + '0');
+        }
+        ans[i] += nho;
     }
-    cout << endl;
-}
-void nhanso(int S[], int &sopt, int x)
-{
-    int nho = 0;
-    for (int i = 0; i < sopt; i++)
+    while (ans[0] == '0' && ans.size() > 1)
     {
-        nho = S[i] * x + nho;
-        S[i] = nho % MOD;
-        nho = nho / MOD;
+        ans.erase(0, 1);
     }
-    while (nho > 0)
-    {
-        S[sopt++] = nho % MOD;
-        nho = nho / MOD;
-    }
-}
-void giaithua(int n)
-{
-    int S[100000], sopt = 1;
-    S[0] = 1;
-    for (int i = 2; i <= n; i++)
-    {
-        nhanso(S, sopt, i);
-    }
-    hienthi(S, sopt);
+    return ans;
 }
 int main()
 {
@@ -46,8 +29,23 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n,k;
-        cin >> n>>k;
-        giaithua(n);
+        int n, k;
+        cin >> n >> k;
+        if (n == 0 && k == 0)
+        {
+            cout << "1"
+                 << "\n";
+        }
+        else
+        {
+            int c = n - k + 1;
+            string ans = "1";
+            for (int i = c; i <= n; i++)
+            {
+                string tmp = to_string(i);
+                ans = multiply(ans, tmp);
+            }
+            cout << ans << "\n";
+        }
     }
 }
